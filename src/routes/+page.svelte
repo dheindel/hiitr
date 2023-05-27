@@ -38,7 +38,15 @@
       for (let set of workout) {
         if (workoutTimeElapsed >= foo && workoutTimeElapsed <= (foo + set.length)) {
             currentExercise = set.exercise;
-            setTimeRemaining = `${set.length - (workoutTimeElapsed - foo)}`;
+            let tmp = set.length - (workoutTimeElapsed - foo);
+            setTimeRemaining = tmp.toString();
+            if (!paused && tmp <= 5) { 
+                if (tmp === 0) {
+                  speechSynthesis.speak(new SpeechSynthesisUtterance("Done")); 
+                } else {
+                  speechSynthesis.speak(new SpeechSynthesisUtterance(setTimeRemaining));
+                }
+            }
             break;
         } 
 
