@@ -3,10 +3,11 @@
 
     export let countdownLength: number;
     export let name: string;
+    export let onCountdownDone: () => void = () => console.log("done");
 
     let timer: number;
     let timeElapsed = 0;
-    let timeRemaining = 0;
+    let timeRemaining = countdownLength;
     let percentRemaining = "0%";
 
     function countdown() {
@@ -15,13 +16,17 @@
         }
         timer = setTimeout(() => {
             timeElapsed = timeElapsed + 0.1;
+            timeRemaining = countdownLength - timeElapsed;
+            if (timeRemaining <= 0) {
+                $playState = "paused";
+                onCountdownDone();
+            }
             updateDisplay();
             countdown();
         }, 100);
     }
 
     function updateDisplay() {
-        timeRemaining = countdownLength - timeElapsed;
         percentRemaining = `${100 - (timeRemaining / countdownLength) * 100}%`;
     }
 
@@ -47,7 +52,7 @@
     }
 
     .set {
-        height: 80vh;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;

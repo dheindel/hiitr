@@ -1,18 +1,42 @@
 <script lang="ts">
+    import Chooser from "$lib/Chooser.svelte";
     import Countdown from "$lib/Countdown.svelte";
     import { playState } from "$lib/play-state-store";
+    import "../app.css";
 
     function toggleState() {
-        if ($playState === 'playing') { 
-          $playState = 'paused'
+        if ($playState === "playing") {
+            $playState = "paused";
         } else {
-            $playState = 'playing';
+            $playState = "playing";
         }
-        // paused = !paused;
+    }
+
+    let countdownLength = 30;
+
+    function onSelection(length: number) {
+        countdownLength = length;
+        $playState = "playing";
+    }
+
+    function onCountdownDone() {
+        $playState = "between-sets";
     }
 </script>
 
-<button on:click={toggleState}>
-    {$playState}
-</button>
-<Countdown countdownLength={30} name={"stuff"} /> 
+<header>
+    <button on:click={toggleState}>
+        {$playState}
+    </button>
+</header>
+{#if $playState === "playing" || $playState === "paused"}
+    <Countdown {onCountdownDone} {countdownLength} name={"Workout"} />
+{:else}
+    <Chooser {onSelection} />
+{/if}
+
+<style>
+    header {
+        position: fixed;
+    }
+</style>
