@@ -31,8 +31,10 @@
 
     function onSelection(length: number) {
         speechSynthesis.speak(new SpeechSynthesisUtterance(`${length} seconds`));
-        countdownLength = length;
-        $playState = "playing";
+        setTimeout(() => {
+            countdownLength = length;   
+            $playState = "playing";
+        }, 1000);
     }
 
     function onCountdownDone() {
