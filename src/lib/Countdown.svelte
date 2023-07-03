@@ -28,6 +28,15 @@
 
     function updateDisplay() {
         percentRemaining = `${100 - (timeRemaining / countdownLength) * 100}%`;
+        if ($playState === "playing" && timeRemaining <= 5) {
+            if (timeRemaining === 0) {
+                speechSynthesis.speak(new SpeechSynthesisUtterance("Done"));
+            } else {
+                speechSynthesis.speak(
+                    new SpeechSynthesisUtterance(timeRemaining.toString())
+                );
+            }
+        }
     }
 
     function toggleState(state: PlayState) {
