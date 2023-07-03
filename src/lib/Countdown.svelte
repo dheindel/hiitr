@@ -80,7 +80,7 @@
     }
 
     .exercise-time-remaining {
-        font-size: 8rem;
+        font-size: 10rem;
         font-weight: 600;
     }
 

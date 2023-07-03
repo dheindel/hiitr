@@ -31,7 +31,7 @@
         border: 0;
         padding: 1rem;
         border-radius: 8px;
-        font-size: 1.6rem;
+        font-size: 2em;
         background: white;
     }
 </style>
