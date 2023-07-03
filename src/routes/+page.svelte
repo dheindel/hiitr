@@ -11,7 +11,6 @@
             $playState = "paused";
         } else {
             requestWakeLock();
-            speechSynthesis.speak(new SpeechSynthesisUtterance("Starting"));
             $playState = "playing";
         }
     }
@@ -31,6 +30,7 @@
     let countdownLength = 30;
 
     function onSelection(length: number) {
+        speechSynthesis.speak(new SpeechSynthesisUtterance(`${length} seconds`));
         countdownLength = length;
         $playState = "playing";
     }
