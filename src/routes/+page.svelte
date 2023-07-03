@@ -11,6 +11,7 @@
             $playState = "paused";
         } else {
             requestWakeLock();
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Starting"));
             $playState = "playing";
         }
     }
