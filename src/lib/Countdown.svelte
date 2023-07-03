@@ -26,9 +26,12 @@
         }, 100);
     }
 
+    let lastSpoken = 0;
     function updateDisplay() {
         percentRemaining = `${100 - (timeRemaining / countdownLength) * 100}%`;
-        if ($playState === "playing" && timeRemaining <= 5) {
+        timeRemaining = Math.trunc(countdownLength - timeElapsed);
+        if ($playState === "playing" && timeRemaining <= 5 && lastSpoken !== timeRemaining) {
+            lastSpoken = timeRemaining;
             if (timeRemaining === 0) {
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Done"));
             } else {
