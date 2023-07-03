@@ -4,11 +4,26 @@
     import { playState } from "$lib/play-state-store";
     import "../app.css";
 
+    let wakeLock: unknown;
+
     function toggleState() {
         if ($playState === "playing") {
             $playState = "paused";
         } else {
+            requestWakeLock();
             $playState = "playing";
+        }
+    }
+
+    async function requestWakeLock() {
+        if (wakeLock) {
+            return;
+        }
+        try {
+            // @ts-ignore
+            wakeLock = await navigator.wakeLock.request("screen");
+        } catch (ex) {
+            console.error("Could not get wake lock:", ex);
         }
     }
 
