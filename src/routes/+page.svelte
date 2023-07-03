@@ -30,9 +30,11 @@
     let countdownLength = 30;
 
     function onSelection(length: number) {
-        speechSynthesis.speak(new SpeechSynthesisUtterance(`${length} seconds`));
+        speechSynthesis.speak(
+            new SpeechSynthesisUtterance(`${length} seconds`)
+        );
         setTimeout(() => {
-            countdownLength = length;   
+            countdownLength = length;
             $playState = "playing";
         }, 1000);
     }
@@ -43,9 +45,11 @@
 </script>
 
 <header>
-    <button on:click={toggleState}>
-        {$playState}
-    </button>
+    {#if $playState !== "between-sets"}
+        <button on:click={toggleState}>
+            {$playState}
+        </button>
+    {/if}
 </header>
 {#if $playState === "playing" || $playState === "paused"}
     <Countdown {onCountdownDone} {countdownLength} name={"Workout"} />
