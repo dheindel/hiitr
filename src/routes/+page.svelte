@@ -35,8 +35,8 @@
         );
         await requestWakeLock();
         $playState = "paused";
+        countdownLength = length;
         setTimeout(() => {
-            countdownLength = length;
             $playState = "playing";
         }, 1500);
     }
