@@ -38,7 +38,7 @@
         countdownLength = length;
         setTimeout(() => {
             $playState = "playing";
-        }, 1500);
+        }, 2000);
     }
 
     function onCountdownDone() {
