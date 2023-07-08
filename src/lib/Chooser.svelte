@@ -26,16 +26,16 @@
     form {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        /* display: flex; */
-        /* flex-direction: column; */
-        gap: 4rem;
+        gap: 50px;
     }
 
     button {
+        color: navy;
         border: 0;
         padding: 2rem;
-        border-radius: 50%;
+        border-radius: 12px;
         font-size: 3em;
+        font-weight: 500;
         background: white;
     }
 </style>
