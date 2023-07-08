@@ -29,14 +29,16 @@
 
     let countdownLength = 30;
 
-    function onSelection(length: number) {
+    async function onSelection(length: number) {
         speechSynthesis.speak(
             new SpeechSynthesisUtterance(`${length} seconds`)
         );
+        await requestWakeLock();
+        $playState = "paused";
         setTimeout(() => {
             countdownLength = length;
             $playState = "playing";
-        }, 1000);
+        }, 1500);
     }
 
     function onCountdownDone() {
